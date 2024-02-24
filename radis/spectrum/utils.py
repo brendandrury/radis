@@ -11,6 +11,7 @@ object
 import subprocess
 
 from radis.misc.basics import partition
+from security import safe_command
 
 # %% Definitions
 
@@ -658,7 +659,7 @@ def generate_perf_profile(profiler):
     parse_profiler(perf_tree)
     st.dump_stats("spectrum.prof")
 
-    return subprocess.Popen(["tuna", "spectrum.prof"])
+    return safe_command.run(subprocess.Popen, ["tuna", "spectrum.prof"])
 
 
 if __name__ == "__main__":
