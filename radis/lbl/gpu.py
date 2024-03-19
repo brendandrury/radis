@@ -6,6 +6,7 @@ import cupy as cp
 import numpy as np
 
 from radis.misc.utils import getProjectRoot
+import fickling
 
 
 class initData(ctypes.Structure):
@@ -168,7 +169,7 @@ def init_gaussian_params(log_2vMm, verbose_gpu):
 
     fname = "Gaussian_minmax_" + str(len(log_2vMm)) + ".dat"
     try:
-        param_data = pickle.load(open(fname, "rb"))
+        param_data = fickling.load(open(fname, "rb"))
         if verbose_gpu >= 2:
             print(" (from cache)... ")
 
@@ -196,7 +197,7 @@ def init_lorentzian_params(log_2gs, na, verbose_gpu):
         with open(fname, "rb") as f:
             if verbose_gpu >= 2:
                 print(" (from cache)... ")
-            param_data = pickle.load(f)
+            param_data = fickling.load(f)
 
     except:
         if verbose_gpu >= 2:

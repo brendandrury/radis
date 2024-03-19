@@ -270,7 +270,8 @@ def run_setup(with_binary):
             "tuna",  # to generate visual/interactive performance profiles
             "vaex",  # HDF5,
             "h5py",  # HDF5
-            "habanero",  # CrossRef API to retrieve data from doi
+            "habanero",  # HDF5
+            "fickling~=0.1.0",  # CrossRef API to retrieve data from doi
         ],
         extras_require={
             "dev": [
