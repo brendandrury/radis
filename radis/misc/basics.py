@@ -50,17 +50,17 @@ def make_folders(path, folders):
 
 def all_in(keys, L):
     """Returns whether all items in keys are in list L."""
-    return all([k in L for k in keys])
+    return all(k in L for k in keys)
 
 
 def in_all(key, list_of_list):
     """Returns true if key is in all lists."""
-    return all([key in L for L in list_of_list])
+    return all(key in L for L in list_of_list)
 
 
 def any_in(keys, L):
     """Returns whether any of the items in keys are in list L."""
-    return any([k in L for k in keys])
+    return any(k in L for k in keys)
 
 
 def key_max_val(d):

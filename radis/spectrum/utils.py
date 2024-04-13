@@ -628,7 +628,7 @@ def generate_perf_profile(profiler):
 
         # Parse children
         if "children" in tree:
-            children_cumtime = sum([child["value"] for child in tree["children"]])
+            children_cumtime = sum(child["value"] for child in tree["children"])
             for child in tree["children"]:
                 # child_name = "", 1, child["name"]
                 child_time = child["value"]

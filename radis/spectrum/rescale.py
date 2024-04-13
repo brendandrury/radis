@@ -277,7 +277,7 @@ def get_redundant(spec):
                 #                if [key] == from_keys:
                 #                    # that you can be recomputed from yourself doesnt make you redundant
                 #                    continue
-                if all([activated[k] and not redundant[k] for k in from_keys]):
+                if all(activated[k] and not redundant[k] for k in from_keys):
                     redundant[key] = True  # declare redundant
                     continue
         else:
@@ -288,7 +288,7 @@ def get_redundant(spec):
 
 
 def _path_is_complete(list_of_keys, computed_keys):
-    return all([computed_keys[k] for k in list_of_keys])
+    return all(computed_keys[k] for k in list_of_keys)
 
 
 def get_reachable(spec):  # , derivation_graph):
@@ -442,7 +442,7 @@ def get_recompute(spec, wanted, no_change=False, true_path_length=None):
                     # amount of not already recomputed quantities
                     score_non_recomputed_per_path = {}
                     for from_keys in derivation_graph[key]:
-                        score = sum([not recompute[k] for k in from_keys])
+                        score = sum(not recompute[k] for k in from_keys)
                         # if several paths have same score the last will be chosen:
                         score_non_recomputed_per_path[score] = from_keys
                     # get the path with the minimum of values to recompute:

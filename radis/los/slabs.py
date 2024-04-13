@@ -404,11 +404,11 @@ def resample_slabs(
 
     def same_wavespace(wl):
         try:
-            assert all([(w == wl[0]).all() for w in wl[1:]])
+            assert all((w == wl[0]).all() for w in wl[1:])
         except AssertionError:
             # ok if wavespace is the same within some tolerance
             #   @dev: testing with == first is 10x faster and works in most cases.
-            if all([allclose(w, wl[0]) for w in wl[1:]]):
+            if all(allclose(w, wl[0]) for w in wl[1:]):
                 return True
             return False
         except:  # ex:  different lengths
@@ -443,9 +443,9 @@ def resample_slabs(
                 )
             elif resample_wavespace == "full":
                 # ... get bounds
-                wmin = min([w.min() for w in wl])  # minimum of all
-                wmax = max([w.max() for w in wl])  # maximum of all
-                dw = min([abs(diff(w)).min() for w in wl])  # highest density
+                wmin = min(w.min() for w in wl)  # minimum of all
+                wmax = max(w.max() for w in wl)  # maximum of all
+                dw = min(abs(diff(w)).min() for w in wl)  # highest density
                 wnew = arange(wmin, wmax + dw, dw)
                 if wnew[-1] > wmax:  # sometimes arange doesnt work as expected
                     wnew = wnew[:-1]
@@ -459,9 +459,9 @@ def resample_slabs(
                 # note: s.resample() fills with 0 when out of bounds
             elif resample_wavespace == "intersect":
                 # ... get bounds
-                wmin = max([w.min() for w in wl])  # maximum of all
-                wmax = min([w.max() for w in wl])  # minimum of all
-                dw = min([abs(diff(w)).min() for w in wl])  # highest density
+                wmin = max(w.min() for w in wl)  # maximum of all
+                wmax = min(w.max() for w in wl)  # minimum of all
+                dw = min(abs(diff(w)).min() for w in wl)  # highest density
                 wnew = arange(wmin, wmax + dw, dw)
                 if wnew[-1] > wmax:  # sometimes arange doesnt work as expected
                     wnew = wnew[:-1]
@@ -644,7 +644,7 @@ def MergeSlabs(*slabs, **kwargs) -> Spectrum:
                 "path_length must be defined for all slabs in MergeSlabs. "
                 + "Set it with `s.conditions['path_length']=`. "
             )
-        if not all([L == path_lengths[0] for L in path_lengths[1:]]):
+        if not all(L == path_lengths[0] for L in path_lengths[1:]):
             raise ValueError(
                 "path_length must be equal for all MergeSlabs inputs"
                 + "  (got {0})".format(path_lengths)
@@ -683,7 +683,7 @@ def MergeSlabs(*slabs, **kwargs) -> Spectrum:
             "lines_cutoff",
         ]:  # sum of all
             if in_all(cond, [s.conditions for s in slabs]):
-                conditions[cond] = sum([s.conditions[cond] for s in slabs])
+                conditions[cond] = sum(s.conditions[cond] for s in slabs)
         # ... TODO @dev: create a large list/dictionary outside of SerialSlabS/MergeSlabs
         # ... with how to deal with all every condition (sum, list, intersect, etc.)
         # ... Example :
