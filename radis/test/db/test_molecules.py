@@ -21,9 +21,7 @@ def test_herzberg_coefficients_CO2_json(verbose=True, *args, **kwargs):
     # @dev: update this test if we ever are to change the default Herzberg
     # coeffs in CO2/molecules_data.json
 
-    assert set(get_herzberg_coefficients("CO2", 1, "X1SIGu+")) == set(
-        ["we1", "we2", "we3", "wexe1", "wexe2", "wexe3", "Be", "De", "He"]
-    )
+    assert set(get_herzberg_coefficients("CO2", 1, "X1SIGu+")) == {"we1", "we2", "we3", "wexe1", "wexe2", "wexe3", "Be", "De", "He"}
 
     if verbose:
         print(

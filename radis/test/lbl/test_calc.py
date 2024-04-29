@@ -646,7 +646,7 @@ def test_calc_spectrum_multiple_molecules(
         s_both.plot(wunit="nm")
 
     # Check calculation went fine:
-    assert set(s_both.conditions["molecule"]) == set(["CO2", "CO"])
+    assert set(s_both.conditions["molecule"]) == {"CO2", "CO"}
 
     # Compare
     from radis.los.slabs import MergeSlabs
@@ -676,7 +676,7 @@ def test_calc_spectrum_multiple_molecules_otherinputs(
         isotope={"CO2": "1,2", "CO": "1,2,3"},
         verbose=verbose,
     )
-    assert set(s.conditions["molecule"]) == set(["CO2", "CO"])
+    assert set(s.conditions["molecule"]) == {"CO2", "CO"}
 
     # Give isotope only
     s = calc_spectrum(
@@ -687,7 +687,7 @@ def test_calc_spectrum_multiple_molecules_otherinputs(
         isotope={"CO2": "1,2", "CO": "1,2,3"},
         verbose=verbose,
     )
-    assert set(s.conditions["molecule"]) == set(["CO2", "CO"])
+    assert set(s.conditions["molecule"]) == {"CO2", "CO"}
 
     # Give mole fractions only
     s = calc_spectrum(
@@ -699,7 +699,7 @@ def test_calc_spectrum_multiple_molecules_otherinputs(
         isotope="1,2",
         verbose=verbose,
     )
-    assert set(s.conditions["molecule"]) == set(["CO2", "CO"])
+    assert set(s.conditions["molecule"]) == {"CO2", "CO"}
 
     return True
 

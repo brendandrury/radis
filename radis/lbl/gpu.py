@@ -76,7 +76,7 @@ applyLineshapes = cuda_module.get_function("applyLineshapes")
 
 def py_calc_lorentzian_envelope_params(na, log_2gs, verbose=False):
     # Remove duplicates
-    unique_lines = set([])
+    unique_lines = set()
     for i in range(len(na)):
         unique_lines.add(str(na[i]) + " " + str(log_2gs[i]))
 
