@@ -135,7 +135,7 @@ def is_jsonable(x):
 def save(
     s: Spectrum,
     path,
-    discard=[],
+    discard=None,
     compress=True,
     add_info=None,
     add_date=None,
@@ -197,6 +197,7 @@ def save(
     :func:`~radis.tools.database.load_spec`,
     :meth:`~radis.spectrum.spectrum.Spectrum.store`
     """
+    discard = [] if discard is None else discard
 
     # 1) Format to JSON writable dictionary
     sjson = _format_to_jsondict(s, discard, compress, verbose=verbose)

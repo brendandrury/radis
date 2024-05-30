@@ -302,7 +302,8 @@ class ConditionDict(dict):
             obj_copy[k] = v
         return obj_copy
 
-    def __deepcopy__(self, memo={}):
+    def __deepcopy__(self, memo=None):
+        memo = {} if memo is None else memo
         obj_copy = ConditionDict()
         for k, v in self.items():
             obj_copy[k] = deepcopy(v)
@@ -1558,7 +1559,7 @@ class DatabankLoader(object):
         path,
         autoretrieve=True,
         autoupdate=True,
-        add_info=["Tvib", "Trot"],
+        add_info=None,
         add_date="%Y%m%d",
         compress=True,
     ):
@@ -1601,6 +1602,7 @@ class DatabankLoader(object):
 
         .. minigallery:: radis.lbl.loader.DatabankLoader.init_database
         """
+        add_info = ["Tvib", "Trot"] if add_info is None else add_info
 
         db = SpecDatabase(path, add_info=add_info, add_date=add_date, binary=compress)
 
@@ -1626,7 +1628,7 @@ class DatabankLoader(object):
     # =========================================================================
 
     def _init_equilibrium_partition_functions(
-        self, parfunc, parfuncfmt, predefined_partition_functions={}
+        self, parfunc, parfuncfmt, predefined_partition_functions=None
     ):
         """Initializes equilibrium partition functions in ``self.parsum_tab``
 
@@ -1648,6 +1650,7 @@ class DatabankLoader(object):
             ::
                 {molecule: {isotope: PartitionFunctionTabulator object}}
         """
+        predefined_partition_functions = {} if predefined_partition_functions is None else predefined_partition_functions
 
         # Let's get the tabulated partition function (to calculate eq spectra)
         molecule = self.input.molecule
@@ -2237,7 +2240,7 @@ class DatabankLoader(object):
                 return None
 
     def _build_partition_function_interpolator(
-        self, parfunc, parfuncfmt, molecule, isotope, predefined_partition_functions={}
+        self, parfunc, parfuncfmt, molecule, isotope, predefined_partition_functions=None
     ):
         """Returns an universal partition function object ``parsum`` with the
         following methods defined::
@@ -2251,6 +2254,7 @@ class DatabankLoader(object):
             ::
                 {molecule: {isotope: PartitionFunctionTabulator object}}
         """
+        predefined_partition_functions = {} if predefined_partition_functions is None else predefined_partition_functions
 
         if __debug__:
             printdbg(

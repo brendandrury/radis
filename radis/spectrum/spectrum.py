@@ -346,10 +346,11 @@ class Spectrum(object):
         lines=None,
         wunit=None,
         name=None,
-        references={},
+        references=None,
         check_wavespace=True,
         **kwargs,
     ):
+        references = {} if references is None else references
         # TODO: add help on creating a Spectrum from a dictionary
 
         # Check inputs
@@ -2939,7 +2940,7 @@ class Spectrum(object):
     def store(
         self,
         path,
-        discard=["lines", "populations"],
+        discard=None,
         compress=True,
         add_info=None,
         add_date=None,
@@ -3022,6 +3023,7 @@ class Spectrum(object):
         :meth:`~radis.spectrum.spectrum.Spectrum.savetxt`
 
         """
+        discard = ["lines", "populations"] if discard is None else discard
         # TODO
         #
         # - in case a spectrometer linear dispersion function is used in

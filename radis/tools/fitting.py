@@ -27,7 +27,7 @@ from radis.spectrum.compare import get_default_units, get_diff, get_residual
 
 
 # Calculate a new spectrum for given parameters:
-def LTEModel(factory, fittable_parameters, fixed_parameters={}) -> Spectrum:
+def LTEModel(factory, fittable_parameters, fixed_parameters=None) -> Spectrum:
     """A model returning a single-slab LTE spectrum
 
     Parameters
@@ -51,6 +51,7 @@ def LTEModel(factory, fittable_parameters, fixed_parameters={}) -> Spectrum:
     :py:func:`~radis.tools.fitting.Tvib12Tvib3Trot_NonLTEModel`
 
     """
+    fixed_parameters = {} if fixed_parameters is None else fixed_parameters
 
     kwargs = {"name": "fit"}
 
@@ -73,7 +74,7 @@ def LTEModel(factory, fittable_parameters, fixed_parameters={}) -> Spectrum:
 
 # Calculate a new spectrum for given parameters:
 def Tvib12Tvib3Trot_NonLTEModel(
-    factory, fittable_parameters, fixed_parameters={}
+    factory, fittable_parameters, fixed_parameters=None
 ) -> Spectrum:
     """A model returning a single-slab non-LTE spectrum with Tvib=(T12, T12, T3), Trot
 
@@ -104,6 +105,7 @@ def Tvib12Tvib3Trot_NonLTEModel(
     --------
     :py:func:`~radis.tools.fitting.LTEModel`
     """
+    fixed_parameters = {} if fixed_parameters is None else fixed_parameters
 
     fittable_parameters = fittable_parameters.copy()
 
@@ -144,11 +146,11 @@ def fit_spectrum(
     s_exp,
     model,
     fit_parameters,
-    bounds={},
-    fixed_parameters={},
+    bounds=None,
+    fixed_parameters=None,
     plot=False,
     verbose=True,
-    solver_options={"maxiter": 300},
+    solver_options=None,
 ) -> Union[Spectrum, OptimizeResult]:
     """Fit an experimental spectrum with an arbitrary model and an arbitrary
     number of fit parameters.
@@ -209,6 +211,9 @@ def fit_spectrum(
     :py:meth:`~radis.lbl.factory.SpectrumFactory.fit_spectrum`,
     :py:mod:`fitroom`
     """
+    bounds = {} if bounds is None else bounds
+    fixed_parameters = {} if fixed_parameters is None else fixed_parameters
+    solver_options = {"maxiter": 300} if solver_options is None else solver_options
 
     # Get model being fitted:
     compute_los_model = lambda fit_parameters: model(

@@ -123,11 +123,11 @@ def compare_dict(
     d1,
     d2,
     verbose="if_different",
-    compare_as_paths=[],
+    compare_as_paths=None,
     return_string=False,
     df1_str="Left",
     df2_str="Right",
-    ignore_keys=[],
+    ignore_keys=None,
 ):
     """Returns ratio of equal keys [0-1]
     If verbose, also print all keys and values on 2 columns
@@ -157,6 +157,8 @@ def compare_dict(
     out, string: float [0-1], str
         ratio of matching keys and comparison message
     """
+    compare_as_paths = [] if compare_as_paths is None else compare_as_paths
+    ignore_keys = [] if ignore_keys is None else ignore_keys
 
     old_stdout = sys.stdout
     sys.stdout = newstdout = StringIO()  # capture all print

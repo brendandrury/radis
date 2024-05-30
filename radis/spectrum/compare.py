@@ -668,7 +668,7 @@ def plot_diff(
     diff_scale_multiplier=1,
     discard_centile=0,
     plot_medium="vacuum_only",
-    legendargs={"loc": "best"},
+    legendargs=None,
     show_ruler=False,
 ):
     """Plot two spectra, and the difference between them. ``method=`` allows
@@ -806,6 +806,7 @@ def plot_diff(
     :func:`~radis.spectrum.compare.get_residual`,
     :meth:`~radis.spectrum.spectrum.compare_with`
     """
+    legendargs = {"loc": "best"} if legendargs is None else legendargs
     import matplotlib.pyplot as plt
     from matplotlib import gridspec
     from matplotlib.widgets import MultiCursor
@@ -1078,7 +1079,7 @@ def compare_spectra(
     rtol=1e-5,
     ignore_nan=False,
     ignore_outliers=False,
-    ignore_conditions=["calculation_time"],
+    ignore_conditions=None,
     normalize=False,
     **kwargs
 ) -> bool:
@@ -1140,6 +1141,7 @@ def compare_spectra(
 
         s1 == s2       # will return True or False
     """
+    ignore_conditions = ["calculation_time"] if ignore_conditions is None else ignore_conditions
 
     # Check inputs
     if not 0 <= ignore_outliers < 1:

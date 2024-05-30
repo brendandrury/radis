@@ -238,7 +238,7 @@ def hdf2df(
     load_wavenum_min=None,
     load_wavenum_max=None,
     verbose=True,
-    store_kwargs={},
+    store_kwargs=None,
     engine="auto",
 ):
     """Load a HDF5 line databank into a Pandas DataFrame.
@@ -296,6 +296,7 @@ def hdf2df(
     Always check for existence !
 
     """
+    store_kwargs = {} if store_kwargs is None else store_kwargs
 
     if engine == "auto":
         engine = HDF5Manager.guess_engine(fname)

@@ -34,7 +34,7 @@ CACHE_FILE_NAME = "tempfile_{molecule}_{isotope}_{wmin:.2f}_{wmax:.2f}.h5"
 
 
 def fetch_astroquery(
-    molecule, isotope, wmin, wmax, verbose=True, cache=True, expected_metadata={}
+    molecule, isotope, wmin, wmax, verbose=True, cache=True, expected_metadata=None
 ):
     """Download a HITRAN line database to a Pandas DataFrame.
 
@@ -77,6 +77,7 @@ def fetch_astroquery(
     :py:attr:`astroquery.query.BaseQuery.cache_location`
 
     """
+    expected_metadata = {} if expected_metadata is None else expected_metadata
     from astropy import units as u
     from astroquery.hitran import Hitran
 

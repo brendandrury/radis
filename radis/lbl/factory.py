@@ -1972,9 +1972,9 @@ class SpectrumFactory(BandFactory):
         s_exp,
         model,
         fit_parameters,
-        bounds={},
+        bounds=None,
         plot=False,
-        solver_options={"maxiter": 300},
+        solver_options=None,
         **kwargs,
     ) -> Union[Spectrum, OptimizeResult]:
         """Fit an experimental spectrum with an arbitrary model and an arbitrary
@@ -2040,6 +2040,8 @@ class SpectrumFactory(BandFactory):
         :py:mod:`fitroom`
 
         """
+        bounds = {} if bounds is None else bounds
+        solver_options = {"maxiter": 300} if solver_options is None else solver_options
         from radis.tools.fitting import fit_spectrum
 
         return fit_spectrum(

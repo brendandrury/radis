@@ -190,7 +190,7 @@ def transmittance_spectrum(
 
 
 def experimental_spectrum(
-    w, I, wunit="nm", Iunit="counts", conditions={}, cond_units=None, name=None
+    w, I, wunit="nm", Iunit="counts", conditions=None, cond_units=None, name=None
 ) -> Spectrum:
     """Convert ``(w, I)`` into a :py:class:`~radis.spectrum.spectrum.Spectrum`
     object that has unit conversion and plotting capabilities. Convolution is
@@ -247,6 +247,7 @@ def experimental_spectrum(
     :meth:`~radis.spectrum.spectrum.Spectrum.from_txt`,
     :func:`~radis.tools.database.load_spec`
     """
+    conditions = {} if conditions is None else conditions
 
     if np.shape(w) != np.shape(I):
         raise ValueError(

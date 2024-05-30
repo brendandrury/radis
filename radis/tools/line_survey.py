@@ -61,7 +61,7 @@ def LineSurvey(
     medium="air",
     cutoff=None,
     plot="S",
-    lineinfo=["int", "A", "El"],
+    lineinfo=None,
     barwidth=0.07,
     yscale="log",
     writefile=None,
@@ -146,6 +146,7 @@ def LineSurvey(
 
     .. [2] `SpectraPlot <http://www.spectraplot.com/survey>`__
     """
+    lineinfo = ["int", "A", "El"] if lineinfo is None else lineinfo
 
     # Check inputs
     if xunit is not None:

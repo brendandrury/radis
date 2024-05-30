@@ -1346,9 +1346,10 @@ class PartFunc_Dunham(RovibParFuncCalculator):
         verbose=True,
         calc_Evib_per_mode=True,
         calc_Evib_harmonic_anharmonic=True,
-        group_energy_modes_in_2T_model={"CO2": (["Evib1", "Evib2", "Evib3"], ["Erot"])},
+        group_energy_modes_in_2T_model=None,
         mode="full summation",
     ):  # , ZPE=None):
+        group_energy_modes_in_2T_model = {"CO2": (["Evib1", "Evib2", "Evib3"], ["Erot"])} if group_energy_modes_in_2T_model is None else group_energy_modes_in_2T_model
         # TODO: find a way to initialize calc_Evib_per_mode or calc_Evib_harmonic_anharmonic from
         # the SpectrumFactory on Spectrum generation time...
         # Maybe recompute the cache file if needed?

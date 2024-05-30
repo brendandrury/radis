@@ -453,7 +453,7 @@ def createConfigFile(config_path, verbose=True):
         print("Created ~/radis.json in {0}".format(dirname(config_path)))
 
 
-def getDatabankEntries_configformat(dbname, get_extra_keys=[]):
+def getDatabankEntries_configformat(dbname, get_extra_keys=None):
     r"""Read :ref:`~/.radis <label_lbl_config_file>` config file and returns a dictionary of entries.
 
     Parameters
@@ -506,6 +506,7 @@ def getDatabankEntries_configformat(dbname, get_extra_keys=[]):
 
 
     """
+    get_extra_keys = [] if get_extra_keys is None else get_extra_keys
     warnings.warn(DeprecationWarning("config format changed to JSON in radis 0.9.29"))
     config = get_user_config_configformat()
 
@@ -752,7 +753,7 @@ def printDatabankList_configformat():
         # it's okay
 
 
-def getDatabankEntries(dbname, get_extra_keys=[], configpath=CONFIG_PATH_JSON):
+def getDatabankEntries(dbname, get_extra_keys=None, configpath=CONFIG_PATH_JSON):
     r"""Read :ref:`~/radis.json <label_lbl_config_file>` config file and returns a dictionary of entries.
 
     Parameters
@@ -808,6 +809,7 @@ def getDatabankEntries(dbname, get_extra_keys=[], configpath=CONFIG_PATH_JSON):
 
 
     """
+    get_extra_keys = [] if get_extra_keys is None else get_extra_keys
     # Loading `~/radis.json` file
     _config = get_user_config(configpath)
 

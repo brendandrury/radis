@@ -259,7 +259,7 @@ class MdbExomol(object):
     def __init__(
         self,
         path,
-        nurange=[-np.inf, np.inf],
+        nurange=None,
         margin=1.0,
         crit=-np.inf,
         bkgdatm="H2",
@@ -279,6 +279,7 @@ class MdbExomol(object):
            The trans/states files can be very large. For the first time to read it, we convert it to the feather-format. After the second-time, we use the feather format instead.
 
         """
+        nurange = [-np.inf, np.inf] if nurange is None else nurange
         explanation = "Note: Couldn't find the feather format. We convert data to the feather format. After the second time, it will become much faster."
 
         self.path = pathlib.Path(path)

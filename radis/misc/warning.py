@@ -304,7 +304,7 @@ def reset_warnings(status):
             warnings.simplefilter("default", WarningType)
 
 
-def warn(message, category="default", status={}):
+def warn(message, category="default", status=None):
     """Trigger a warning, an error or just ignore based on the value defined in
     the :py:attr:`~radis.lbl.loader.DatabankLoader.warnings` dictionary.
 
@@ -333,6 +333,7 @@ def warn(message, category="default", status={}):
             )
 
     """
+    status = {} if status is None else status
     # TODO (refactor): make it possible to run warn(NegativeEnergiesWarning("message"))
     # instead of warn("message, "NegativeEnergiesWarning")
     # ex :
